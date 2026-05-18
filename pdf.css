@@ -1,0 +1,131 @@
+@page {
+    size: A4;
+    margin: 20px;
+}
+
+body {
+    font-family: DejaVu Sans, sans-serif;
+    font-size: 11px;
+    color: #222;
+    margin: 0;
+}
+
+/* ===== Layout ===== */
+.resume-container {
+    width: 100%;
+}
+
+.resume-name {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.resume-contact {
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+.resume-columns {
+    width: 100%;
+}
+
+.left-column {
+    width: 48%;
+    float: left;
+}
+
+.right-column {
+    width: 48%;
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.resume-section {
+    margin-bottom: 8px;
+    page-break-inside: avoid;
+}
+
+.resume-title {
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+}
+
+.resume-content {
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+/* ================= TEMPLATE 1 (Blue Professional) ================= */
+.resume-container.template1 {
+    border-left: 6px solid #007bff;
+}
+
+.template1 .resume-title {
+    color: #007bff;
+}
+
+
+/* ================= TEMPLATE 2 (Modern 2 Column FIXED) ================= */
+
+.resume-container.template2 {
+    background-color: #111111;
+    color: #ffffff;
+    padding: 25px;
+
+    width: 92%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Use table layout instead of float */
+.template2 .resume-columns {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.template2 .left-column,
+.template2 .right-column {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+    padding-right: 15px;
+}
+
+/* Section styling */
+.template2 .resume-section {
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+}
+
+/* Titles */
+.template2 .resume-title {
+    color: #00d9ff;
+    border-bottom: 1px solid #444;
+    padding-bottom: 4px;
+}
+
+/* Contact */
+.template2 .resume-contact {
+    color: #cccccc;
+}
+
+/* ================= TEMPLATE 3 (Green Elegant) ================= */
+.resume-container.template3 {
+    border-top: 6px solid #28a745;
+}
+
+.template3 .resume-title {
+    color: #28a745;
+}

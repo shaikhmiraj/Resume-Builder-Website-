@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once "config.php";
+require_once "../config.php"; // adjust path if needed
 
-if(!isset($_SESSION['user_id'])){
-    header("Location: login.php");
+// Check admin login
+if(!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin'){
+    header("Location: ../login.php");
     exit();
 }
 ?>
@@ -11,23 +12,25 @@ if(!isset($_SESSION['user_id'])){
 <!DOCTYPE html>
 <html>
 <head>
-<title>Change Password</title>
+<title>Admin - Change Password</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">  <!-- use main styling -->
+
 </head>
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
-    <a href="php/dashboard.php">Dashboard</a>
-    <a href="profile.php">Profile</a>
-    <a href="login.php">Logout</a>
+    <a href="../admin_dashboard.php">Dashboard</a>
+    <a href="../login.php">Logout</a>
 </div>
 
 <h2 style="text-align:center; margin-top:40px;">Change Password</h2>
 
 <div class="container">
 
-<form action="php/update_password.php" method="POST">
+<form action="update_password.php" method="POST">
 
 <div class="form-group">
     <div class="password-wrapper">
@@ -78,8 +81,8 @@ if(!isset($_SESSION['user_id'])){
 </div>
 
 <button type="submit" class="btn-primary">
-        Update Password
-    </button>
+    Update Password
+</button>
 
 </form>
 

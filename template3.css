@@ -1,0 +1,13 @@
+.resume {
+    background: #f8fafc;
+    padding: 35px;
+    border-left: 6px solid #2563eb;
+}
+
+.resume h1 {
+    color: #1e293b;
+}
+
+.resume h3 {
+    color: #2563eb;
+}
