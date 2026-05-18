@@ -1,57 +1,48 @@
 <?php
 session_start();
-require_once "../config.php";
+require_once "config.php";
 
 if(!isset($_SESSION['user_id'])){
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
-if($_SESSION['role'] != 'admin'){
-    header("Location: ../dashboard.php");
+$user_id = $_SESSION['user_id'];
+
+$old_password = mysqli_real_escape_string($conn, $_POST['old_password']);
+$new_password = mysqli_real_escape_string($conn, $_POST['new_password']);
+
+/* ===== GET CURRENT PASSWORD FROM DB ===== */
+$result = mysqli_query($conn,
+    "SELECT password FROM users WHERE id='$user_id'"
+);
+
+$user = mysqli_fetch_assoc($result);
+
+if(!$user){
+    die("User not found.");
+}
+
+/* ===== VERIFY OLD PASSWORD ===== */
+if($old_password != $user['password']){
+    echo "<script>
+    alert('Old password is incorrect!');
+    window.location.href='change_password.php';
+    </script>";
     exit();
 }
 
-if(isset($_POST['old_password'])){
+/* ===== UPDATE NEW PASSWORD ===== */
+$update = mysqli_query($conn,
+    "UPDATE users SET password='$new_password' WHERE id='$user_id'"
+);
 
-    $admin_id = $_SESSION['user_id'];
-    $old_password = $_POST['old_password'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
-
-    // Fetch current password
-    $query = mysqli_query($conn, "SELECT password FROM users WHERE id='$admin_id'");
-    $row = mysqli_fetch_assoc($query);
-
-    if($row){
-
-        if($row['password'] == $old_password){
-
-            if($new_password == $confirm_password){
-
-                $update = mysqli_query($conn, 
-                    "UPDATE users SET password='$new_password' WHERE id='$admin_id'"
-                );
-
-                if($update){
-                    echo "<script>
-                        alert('Password Updated Successfully!');
-                        window.location.href='../admin_dashboard.php';
-                    </script>";
-                }else{
-                    echo "<script>alert('Something went wrong!');</script>";
-                }
-
-            }else{
-                echo "<script>alert('New passwords do not match!'); history.back();</script>";
-            }
-
-        }else{
-            echo "<script>alert('Old password is incorrect!'); history.back();</script>";
-        }
-
-    }else{
-        echo "<script>alert('Admin not found!'); history.back();</script>";
-    }
+if($update){
+    echo "<script>
+    alert('Password changed successfully!');
+    window.location.href='dashboard.php';
+    </script>";
+}else{
+    die("Error: " . mysqli_error($conn));
 }
 ?>

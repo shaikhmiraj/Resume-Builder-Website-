@@ -1,14 +1,6 @@
 <?php
-
-$servername = "localhost";
-$username   = "root";
-$password   = "";
-$database   = "resume_builder"; // your database name
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$conn = mysqli_connect("localhost","root","","resume_builder");
+if(!$conn){
+    die("Database Connection Failed");
 }
-
 ?>
